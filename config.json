@@ -1,0 +1,16 @@
+{
+    "database": {
+        "Dialect": "mysql",
+        "Database": "sq_discuss", /*数据库名*/
+        "User": "root",
+        "Password": "root",
+        "Charset": "utf8", /*字符集 utf8 */
+        "Host": "127.0.0.1", /*数据库地址*/
+        "Port": 3306, /*数据库端口*/
+        "MaxIdleConns": 5, /*空闲时最大的连接数*/
+        "MaxOpenConns": 10 /*最大的连接数*/
+    },
+    "server": {
+        "Env": "dev"
+    }
+}

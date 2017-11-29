@@ -1,8 +1,8 @@
 package config
 
 import (
-	"discuss/logger"
-	"discuss/utils"
+	"github.com/goes/logger"
+	"github.com/goes/utils"
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
@@ -59,6 +59,13 @@ func initDB() {
 
 type serverConfig struct {
 	Env string
+	SessionID string
+	Port int
+	PageSize int
+	MaxPageSize int
+	MinPageSize int
+	MaxNameLength int
+	MaxContentLength int
 }
 
 var ServerConfig serverConfig

@@ -1,0 +1,10 @@
+.DS_Store
+.idea
+*.log
+*.swp
+
+debug
+dist
+node_modules
+npm-debug.log
+vendor/github.com

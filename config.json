@@ -11,6 +11,26 @@
         "MaxOpenConns": 10 /*最大的连接数*/
     },
     "server": {
-        "Env": "dev"
+        "Env": "dev",
+        "SessionID": "goesid",
+        "Port": 8080, /*服务监听的端口*/
+        "PageSize": 20, /*默认每页栋条数*/
+        "MaxPageSize": 200, /*每页最大条数*/
+        "MinPageSize": 10, /*每页最小条数*/
+        "MaxNameLength": 100, /*最大的名称长度*/
+        "MaxContentLength": 10000 /*最大的内容长度*/
+    },
+    "web": {
+        "Page": {
+            "title": "kdn", /*网站标题*/
+            "JavascriptPath": "/javascripts", /*前端JS请求地址*/
+            "ImagePath": "/images", /*前端图片请求地址*/
+            "CssPath": "/styles" /*前端Css请求地址*/
+        },
+        "Env": "dev",
+        "UseProxy": false, /*node.js发请求是否使用代理*/
+        "ProxyUri": "http://127.0.0.1:8881", /*代理地址与端口*/
+        "Port": 8020, /*前端node.js监听的端口*/
+        "StaticPort": 8021 /*前端静态文件服务器监听栋端口(本地开发)*/
     }
 }

@@ -1,7 +1,7 @@
 package utils
 
 import (
-	"discuss/logger"
+	"github.com/goes/logger"
 	"fmt"
 	"reflect"
 )

@@ -2,6 +2,8 @@ package route
 
 import (
 	"gopkg.in/kataras/iris.v6"
+	"github.com/goes/controller/category"
+	"github.com/goes/controller/admin"
 )
 
 const Prefix  = "goes"
@@ -11,6 +13,13 @@ func Route(app *iris.Framework) {
 	apiPrefix := Prefix
 
 	router := app.Party(apiPrefix)
+	{
+		router.Get("/categories", nil)
+	}
 
-	router.Get("/categories", )
+	adminRouter := app.Party(apiPrefix + "/admin", admin.Authentication)
+	{
+		adminRouter.Post("/category/create", category.Create)
+		adminRouter.Post("/category/update", category.Update)
+	}
 }

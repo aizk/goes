@@ -64,6 +64,8 @@ type serverConfig struct {
 	PageSize int
 	MaxPageSize int
 	MinPageSize int
+	MinOrder int
+	MaxOrder int
 	MaxNameLength int
 	MaxContentLength int
 }

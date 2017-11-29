@@ -17,6 +17,8 @@
         "PageSize": 20, /*默认每页栋条数*/
         "MaxPageSize": 200, /*每页最大条数*/
         "MinPageSize": 10, /*每页最小条数*/
+        "MinOrder": 0, /*最小的排序号*/
+        "MaxOrder": 10000, /*最大的排序号*/
         "MaxNameLength": 100, /*最大的名称长度*/
         "MaxContentLength": 10000 /*最大的内容长度*/
     },

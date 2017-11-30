@@ -7,10 +7,11 @@ import (
 	"github.com/mattes/migrate"
 	_ "github.com/mattes/migrate/source/file"
 	"log"
+	"fmt"
 )
-
+// 数据库可能会冲突，修改 github.com/go-sql-driver/mysql <init> 函数中的数据连接名
 func main() {
-	db, err := sql.Open("mysql", "user:password@tcp(host:port)/dbname?multiStatements=true")
+	db, err := sql.Open("mysql", "root:root@tcp(127.0.0.1:3306)/goes?multiStatements=true")
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -23,20 +24,26 @@ func main() {
 	m, err := migrate.NewWithDatabaseInstance(
 		// file:///absolute/path
 		// file://relative/path
-		"file://.",
+		"file://./",
 		// 数据库名
 		"mysql",
 		driver,
 	)
+	defer m.Close()
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	log.Println(m.Version())
+	version, dirty, err := m.Version()
+
+	fmt.Println("Now Version:", version, dirty)
 	//m.Steps(2)
 
+	//m.Down()
 	// Migrate all the way up ...
 	if err := m.Up(); err != nil {
-	    log.Fatal()
+	    log.Fatal(err)
 	}
+
+	fmt.Println("迁移成功...")
 }

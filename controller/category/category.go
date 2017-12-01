@@ -1,7 +1,7 @@
 package category
 
 import (
-	"gopkg.in/kataras/iris.v6"
+	"github.com/kataras/iris"
 	"github.com/goes/config"
 	"github.com/goes/model"
 	"github.com/goes/controller/common"
@@ -10,7 +10,7 @@ import (
 	"unicode/utf8"
 )
 
-func Save(ctx *iris.Context, edit bool) {
+func Save(ctx iris.Context, edit bool) {
 
 	minOrder := config.ServerConfig.MinOrder
 	maxOrder := config.ServerConfig.MaxOrder
@@ -89,7 +89,7 @@ func Save(ctx *iris.Context, edit bool) {
 		categoryJSON = category
 	}
 
-	ctx.JSON(iris.StatusOK, iris.Map{
+	ctx.JSON(iris.Map{
 		"errCode": model.SUCCESS,
 		"message": "success",
 		"data": iris.Map{
@@ -108,8 +108,8 @@ func Update(ctx *iris.Context) {
 }
 
 // 获取分类信息
-func Info(ctx *iris.Context) {
-	id, err := ctx.ParamInt("id")
+func Info(ctx iris.Context) {
+	id, err := ctx.Params().GetInt("id")
 	if err != nil {
 		common.SendErrorJSON("错误的 ID 类型", ctx)
 		return
@@ -121,7 +121,7 @@ func Info(ctx *iris.Context) {
 	    return
 	}
 
-	ctx.JSON(iris.StatusOK, iris.Map{
+	ctx.JSON(iris.Map{
 		"errCode": model.SUCCESS,
 		"message": "success",
 		"data": iris.Map{
@@ -135,7 +135,7 @@ func Info(ctx *iris.Context) {
 // 获取 status = 1 的可用分类列表
 
 // 获取所有分类
-func FetchAllCategory(ctx *iris.Context) {
+func FetchAllCategory(ctx iris.Context) {
 	var categories []model.Category
 	pageNum, err := strconv.Atoi(ctx.FormValue("pageNum"))
 	if err != nil || pageNum < 1 {
@@ -156,7 +156,7 @@ func FetchAllCategory(ctx *iris.Context) {
 		return
 	}
 
-	ctx.JSON(iris.StatusOK, iris.Map{
+	ctx.JSON(iris.Map{
 		"errCode" : model.SUCCESS,
 		"message"   : "success",
 		"data"  : iris.Map{

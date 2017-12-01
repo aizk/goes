@@ -1,12 +1,12 @@
 package common
 
 import (
-	"gopkg.in/kataras/iris.v6"
+	"github.com/kataras/iris"
 	"github.com/goes/model"
 )
 
-func SendErrorJSON(message string, ctx *iris.Context)  {
-	ctx.JSON(iris.StatusOK, iris.Map{
+func SendErrorJSON(message string, ctx iris.Context)  {
+	ctx.JSON(iris.Map{
 		"errCode": model.ERROR,
 		"message": message,
 		"data": iris.Map{},

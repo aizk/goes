@@ -4,14 +4,14 @@ import "time"
 
 // 文章分类
 type Category struct {
-	ID        uint       `gorm:"primary_key`
+	ID        uint       `gorm:"primary_key" json:"id"`
 	CreatedAt time.Time  `json:"createdAt"`
 	UpdatedAt time.Time  `json:"updatedAt"`
 	DeletedAt *time.Time `sql:"index" json:"deletedAt"`
-	Name      string
-	Sequence  int
-	ParentID  int
-	Status    int
+	Name      string `json:"name"`
+	Sequence  int `json:"sequence"`
+	ParentID  int `json:"parentId"`
+	Status    int `json:"status"`
 }
 
 // 开启

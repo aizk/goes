@@ -1,7 +1,7 @@
 {
     "database": {
         "Dialect": "mysql",
-        "Database": "sq_discuss", /*数据库名*/
+        "Database": "goes", /*数据库名*/
         "User": "root",
         "Password": "root",
         "Charset": "utf8", /*字符集 utf8 */
@@ -20,7 +20,8 @@
         "MinOrder": 0, /*最小的排序号*/
         "MaxOrder": 10000, /*最大的排序号*/
         "MaxNameLength": 100, /*最大的名称长度*/
-        "MaxContentLength": 10000 /*最大的内容长度*/
+        "MaxContentLength": 10000, /*最大的内容长度*/
+        "MaxArticleCateCount": 6 /*文章最多的分类个数*/
     },
     "web": {
         "Page": {

@@ -1,0 +1,5 @@
+package article
+
+func ArticleList()  {
+	
+}

@@ -68,6 +68,7 @@ type serverConfig struct {
 	MaxOrder int
 	MaxNameLength int
 	MaxContentLength int
+	MaxArticleCateCount int
 }
 
 var ServerConfig serverConfig

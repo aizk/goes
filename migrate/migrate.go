@@ -37,13 +37,26 @@ func main() {
 	version, dirty, err := m.Version()
 
 	fmt.Println("Now Version:", version, dirty)
+	// Steps looks at the currently active migration version. It will migrate up if n > 0, and down if n < 0.
 	//m.Steps(2)
 
+	// Down looks at the currently active migration version and will migrate all the way down (applying all down migrations).
 	//m.Down()
+
+
 	// Migrate all the way up ...
 	if err := m.Up(); err != nil {
 	    log.Fatal(err)
 	}
+
+	// Force 强制迁移到某个版本 并设置 dirty 为 false
+	//m.Force(1512019560)
+
+	// Migrate 根据当前版本，向前或向后迁移到某个指定的版本
+	//m.Migrate(1512090940)
+
+	// Drop 删除数据库中的所有东西
+	//m.Drop()
 
 	fmt.Println("迁移成功...")
 }

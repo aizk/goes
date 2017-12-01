@@ -1,0 +1,13 @@
+ALTER TABLE products RENAME comment;
+
+ALTER TABLE comment MODIFY content VARCHAR(10000) NOT NULL;
+
+ALTER TABLE comment DROP COLUMN name;
+
+ALTER TABLE comment DROP COLUMN browse_count;
+
+ALTER TABLE comment ADD COLUMN parent_id INT(11) NOT NULL DEFAULT '0';
+
+ALTER TABLE comment ADD COLUMN article_id INT(11) NOT NULL;
+
+ALTER TABLE comment ADD COLUMN ups INT(11) NOT NULL DEFAULT '0';

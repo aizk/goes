@@ -21,7 +21,8 @@
         "MaxOrder": 10000, /*最大的排序号*/
         "MaxNameLength": 100, /*最大的名称长度*/
         "MaxContentLength": 10000, /*最大的内容长度*/
-        "MaxArticleCateCount": 6 /*文章最多的分类个数*/
+        "MaxArticleCateCount": 6, /*文章最多的分类个数*/
+        "MaxCommentLength": 5000 /*最大评论个数*/
     },
     "web": {
         "Page": {

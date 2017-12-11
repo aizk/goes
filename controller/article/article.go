@@ -190,6 +190,12 @@ func Read(ctx iris.Context) {
 	    common.SendErrorJSON("填充分类信息失败", ctx)
 	    return
 	}
+
+	if err := model.DB.Model(&article).Related(&article.Comments, "comments").Error; err != nil {
+		common.SendErrorJSON("获取评论失败", ctx)
+		return
+	}
+
 	ctx.JSON(iris.Map{
 		"err": model.SUCCESS,
 		"msg": "success",

@@ -2,25 +2,24 @@ package main
 
 import (
 	"github.com/goes/config"
-	"github.com/goes/logger"
+	. "github.com/goes/logger"
 	"github.com/goes/model"
-	"os"
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/mysql"
-	"gopkg.in/kataras/iris.v6"
-	"gopkg.in/kataras/iris.v6/adaptors/httprouter"
-	"gopkg.in/kataras/iris.v6/adaptors/sessions"
-	"time"
+	"github.com/kataras/iris"
+	"os"
+	//"github.com/kataras/iris/sessions"
 	"github.com/goes/route"
+	"github.com/kataras/iris/middleware/logger"
 	"strconv"
 )
 
 func init() {
-	logger.Log(config.DBConfig.Charset)
-	logger.Log(config.ServerConfig)
+	Log(config.DBConfig.Charset)
+	Log(config.ServerConfig)
 	db, err := gorm.Open(config.DBConfig.Dialect, config.DBConfig.URL)
 	if err != nil {
-		logger.Error("open db connect error.")
+		Error("open db connect error.")
 		os.Exit(-1)
 	}
 	db.DB().SetMaxIdleConns(config.DBConfig.MaxIdleConns)
@@ -30,41 +29,50 @@ func init() {
 }
 
 func main() {
-	// 初始化
-	app := iris.New(iris.Configuration{
-		Gzip: true,
+
+	app := iris.New()
+
+	app.Configure(iris.WithConfiguration(iris.Configuration{
 		Charset: "UTF-8",
-	})
-
-	// 测试模式
-	if config.ServerConfig.Env == model.DevelopmentMode {
-		app.Adapt(iris.DevLogger())
-	}
-
-	app.Adapt(sessions.New(sessions.Config{
-		Cookie:config.ServerConfig.SessionID,
-		Expires: time.Minute * 20,
 	}))
 
-	app.Adapt(httprouter.New())
+	app.Use(logger.New())
 
 	route.Route(app)
 
-	app.OnError(iris.StatusNotFound, func(context *iris.Context) {
-		context.JSON(iris.StatusOK, iris.Map{
-			"errCode": model.NotFound,
-			"message": "Not Found",
+	// 测试模式
+	//if config.ServerConfig.Env == model.DevelopmentMode {
+	//	app.Adapt(iris.DevLogger())
+	//}
+
+	//app.Adapt(sessions.New(sessions.Config{
+	//	Cookie:config.ServerConfig.SessionID,
+	//	Expires: time.Minute * 20,
+	//}))
+
+	//app.Adapt(httprouter.New())
+
+	app.OnErrorCode(iris.StatusNotFound, func(ctx iris.Context) {
+		ctx.JSON(iris.Map{
+			"err":  model.NotFound,
+			"msg":  "Not Found",
 			"data": iris.Map{},
 		})
 	})
 
-	app.OnError(500, func(context *iris.Context) {
-		context.JSON(iris.StatusInternalServerError, iris.Map{
-			"errCode": model.ERROR,
+	app.OnErrorCode(iris.StatusInternalServerError, func(ctx iris.Context) {
+		ctx.JSON(iris.Map{
+			"err":     model.ERROR,
 			"message": "error",
-			"data": iris.Map{},
+			"data":    iris.Map{},
 		})
 	})
 
-	app.Listen(":" + strconv.Itoa(config.ServerConfig.Port))
+	address := iris.Addr(":" + strconv.Itoa(config.ServerConfig.Port))
+
+	if config.ServerConfig.Env == model.DevelopmentMode {
+		app.Run(address)
+	} else {
+		app.Run(address, iris.WithoutVersionChecker)
+	}
 }

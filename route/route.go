@@ -1,7 +1,7 @@
 package route
 
 import (
-	"gopkg.in/kataras/iris.v6"
+	"github.com/kataras/iris"
 	"github.com/goes/controller/category"
 	"github.com/goes/controller/admin"
 )
@@ -9,7 +9,7 @@ import (
 const Prefix  = "goes"
 
 // Route 路由
-func Route(app *iris.Framework) {
+func Route(app *iris.Application) {
 	apiPrefix := Prefix
 
 	router := app.Party(apiPrefix)

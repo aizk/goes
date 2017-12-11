@@ -90,8 +90,8 @@ func Save(ctx iris.Context, edit bool) {
 	}
 
 	ctx.JSON(iris.Map{
-		"errCode": model.SUCCESS,
-		"message": "success",
+		"err": model.SUCCESS,
+		"msg": "success",
 		"data": iris.Map{
 			"category": categoryJSON,
 		},
@@ -99,11 +99,11 @@ func Save(ctx iris.Context, edit bool) {
 	return
 }
 
-func Create(ctx *iris.Context) {
+func Create(ctx iris.Context) {
 	Save(ctx, false)
 }
 
-func Update(ctx *iris.Context) {
+func Update(ctx iris.Context) {
 	Save(ctx, true)
 }
 
@@ -122,8 +122,8 @@ func Info(ctx iris.Context) {
 	}
 
 	ctx.JSON(iris.Map{
-		"errCode": model.SUCCESS,
-		"message": "success",
+		"err": model.SUCCESS,
+		"msg": "success",
 		"data": iris.Map{
 			"category": category,
 		},
@@ -157,8 +157,8 @@ func FetchAllCategory(ctx iris.Context) {
 	}
 
 	ctx.JSON(iris.Map{
-		"errCode" : model.SUCCESS,
-		"message"   : "success",
+		"err" : model.SUCCESS,
+		"msg"   : "success",
 		"data"  : iris.Map{
 			"categories": categories,
 		},

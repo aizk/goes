@@ -1,28 +1,28 @@
 <template>
-  <section class="container">
     <div>
-      <logo/>
-      <h1 class="title">
-        web
-      </h1>
-      <h2 class="subtitle">
-        Nuxt.js project
-      </h2>
-      <div class="links">
-        <a href="https://nuxtjs.org/" target="_blank" class="button--green">Documentation</a>
-        <a href="https://github.com/nuxt/nuxt.js" target="_blank" class="button--grey">GitHub</a>
-      </div>
+        <app-header></app-header>
+        <app-footer></app-footer>
     </div>
-  </section>
 </template>
 
 <script>
-import Logo from '~/components/Logo.vue'
+import Header from '~/components/Header.vue'
+import Footer from '~/components/Footer.vue'
 
 export default {
-  components: {
-    Logo
-  }
+    // 由于asyncData方法是在组件 初始化 前被调用的，所以在方法内是没有办法通过 this 来引用组件的实例对象。
+    // Nuxt.js 会将 asyncData 返回的数据融合组件 data 方法返回的数据一并返回给当前组件
+    asyncData (context) {
+        // http request 请求对象，请求参数
+        const query = context.req.query || {}
+        return Promise.all([
+            // axios get
+        ])
+    },
+    components: {
+        'app-header': Header,
+        'app-footer': Footer
+    }
 }
 </script>
 

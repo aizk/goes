@@ -32,6 +32,7 @@
 
 <script>
     export default {
+        // 传入用户状态
         props: [
             'userStatus'
         ],
@@ -42,5 +43,5 @@
         mounted () {
             console.log(this.userStatus)
         }
-    }
+}
 </script>
